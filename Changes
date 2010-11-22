@@ -1,0 +1,8 @@
+--- 0.02 (22/11/2010) ---
+    * added forgotten Changes file
+    * added forgotten requirements (all core modules so not a problem)
+
+--- 0.01 (22/11/2010) ---
+    * basic functionality
+    * wordy and non-wordy modes
+    * tests
