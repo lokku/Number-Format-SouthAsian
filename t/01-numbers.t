@@ -30,17 +30,34 @@ my @tests = (
     [      1234567890,       '1,23,45,67,890', ],
 );
 
-plan tests => 1 + @tests;
+plan tests => 2 * (1 + @tests);
 
-my $formatter = Number::Format::SouthAsian->new();
-ok($formatter, 'created $formatter object');
+{
+    my $formatter = Number::Format::SouthAsian->new();
+    ok($formatter, 'created $formatter object');
 
-foreach my $test (@tests) {
-    my ($input, $output) = @$test;
+    foreach my $test (@tests) {
+        my ($input, $output) = @$test;
 
-    is(
-        $formatter->format_number($input, words => 0),
-        $output,
-        sprintf("%s => '%s'", $input, $output)
-    );
+        is(
+            $formatter->format_number($input),
+            $output,
+            "default behaviour - $output"
+        );
+    }
+}
+
+{
+    my $formatter = Number::Format::SouthAsian->new();
+    ok($formatter, 'created $formatter object with words => 1 default');
+
+    foreach my $test (@tests) {
+        my ($input, $output) = @$test;
+
+        is(
+            $formatter->format_number($input, words => 0),
+            $output,
+            "non-wordy method call - $output"
+        );
+    }
 }

@@ -1,3 +1,8 @@
+--- 0.03 (23/11/2010) ---
+    * pluralize lakhs/crores when the number is not 1
+    * decided on "1.01 crores" not "1 crore 1 lakh"
+    * added tests that check the optional new() parameter behaviour
+
 --- 0.02 (22/11/2010) ---
     * added forgotten Changes file
     * added forgotten requirements (all core modules so not a problem)

@@ -12,13 +12,13 @@ my @tests = (
     [ 1000,                                                   '1,000', ],
     [ 10000,                                                 '10,000', ],
     [ 100000,                                                '1 lakh', ],
-    [ 1000000,                                              '10 lakh', ],
+    [ 1000000,                                             '10 lakhs', ],
     [ 10000000,                                             '1 crore', ],
-    [ 100000000,                                           '10 crore', ],
+    [ 100000000,                                          '10 crores', ],
     [ 1000000000,                                            '1 arab', ],
-    [ 10000000000,                                          '10 arab', ],
+    [ 10000000000,                                         '10 arabs', ],
     [ 100000000000,                                        '1 kharab', ],
-    [ 1000000000000,                                      '10 kharab', ],
+    [ 1000000000000,                                     '10 kharabs', ],
     [ 10000000000000,                                        '1 neel', ],
     [ 1000000000000000,                                     '1 padma', ],
     [ 100000000000000000,                                  '1 shankh', ],
@@ -37,29 +37,44 @@ my @tests = (
 #   [ 10000000000000000000000000000000000000,        '1 maha singhar', ],
 #   [ 1000000000000000000000000000000000000000,     '1 adant singhar', ],
 
-    [ 123000,                                             '1.23 lakh', ],
-    [ 12300000,                                          '1.23 crore', ],
-    [ 1230000000,                                         '1.23 arab', ],
-    [ 123000000000,                                     '1.23 kharab', ],
-    [ 12300000000000,                                     '1.23 neel', ],
-    [ 1234560000000000,                               '1.23456 padma', ],
-    [ 12345600000000000,                              '12.3456 padma', ],
-
-#### should this be "1 crore 1 lakh"?
-    [ 10_100_000,                                        '1.01 crore', ],
+    [ 123000,                                            '1.23 lakhs', ],
+    [ 10100000,                                         '1.01 crores', ],
+    [ 12300000,                                         '1.23 crores', ],
+    [ 1230000000,                                        '1.23 arabs', ],
+    [ 123000000000,                                    '1.23 kharabs', ],
+    [ 12300000000000,                                    '1.23 neels', ],
+    [ 1234560000000000,                              '1.23456 padmas', ],
+    [ 12345600000000000,                             '12.3456 padmas', ],
 );
 
-plan tests => 1 + @tests;
+plan tests => 2 * (1 + @tests);
 
-my $formatter = Number::Format::SouthAsian->new();
-ok($formatter, 'created $formatter object');
+{
+    my $formatter = Number::Format::SouthAsian->new();
+    ok($formatter, 'created $formatter object');
 
-foreach my $test (@tests) {
-    my ($input, $output) = @$test;
+    foreach my $test (@tests) {
+        my ($input, $output) = @$test;
 
-    is(
-        $formatter->format_number($input, words => 1),
-        $output,
-        sprintf("%.0f => '%s'", $input, $output)
-    );
+        is(
+            $formatter->format_number($input, words => 1),
+            $output,
+            "wordy method call - $output"
+        );
+    }
+}
+
+{
+    my $formatter = Number::Format::SouthAsian->new(words => 1);
+    ok($formatter, 'created $formatter object with words => 1 default');
+
+    foreach my $test (@tests) {
+        my ($input, $output) = @$test;
+
+        is(
+            $formatter->format_number($input),
+            $output,
+            "wordy formatter - $output"
+        );
+    }
 }

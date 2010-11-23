@@ -156,7 +156,9 @@ sub _format_number_wordy {
 
     my $word = $zeroes_to_words{$zeroes};
 
-    my $words = "$fraction $word";
+    my $pluralization = $fraction eq '1' ? '' : 's';
+
+    my $words = sprintf('%s %s%s', $fraction, $word, $pluralization);
 
     return $words;
 }
