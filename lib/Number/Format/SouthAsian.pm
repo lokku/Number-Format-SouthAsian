@@ -103,18 +103,15 @@ my %zeroes_to_words = (
     '17' => 'shankh',
     '19' => 'maha shankh',
     '21' => 'ank',
-###########################################################
-#### not supported at 64 bit, disabling for now...
-###########################################################
-#   '23' => 'jald',
-#   '25' => 'madh',
-#   '27' => 'paraardha',
-#   '29' => 'ant',
-#   '31' => 'maha ant',
-#   '33' => 'shisht',
-#   '35' => 'singhar',
-#   '37' => 'maha singhar',
-#   '39' => 'adant singhar',
+    '23' => 'jald',
+    '25' => 'madh',
+    '27' => 'paraardha',
+    '29' => 'ant',
+    '31' => 'maha ant',
+    '33' => 'shisht',
+    '35' => 'singhar',
+    '37' => 'maha singhar',
+    '39' => 'adant singhar',
 );
 
 sub _format_number_wordy {
