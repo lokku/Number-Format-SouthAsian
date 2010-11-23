@@ -140,7 +140,7 @@ sub _format_number_wordy {
 
     my $divisor = "1" . ("0" x $zeroes);
 
-    while (!$zeroes_to_words{$zeroes}) {
+    while (!$zeroes_to_words{$zeroes} || (($number / $divisor) < 1)) {
         $zeroes  -=  1;
         $divisor /= 10;
     }
