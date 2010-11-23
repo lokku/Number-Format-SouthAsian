@@ -129,7 +129,7 @@ sub _format_number_wordy {
     if ($number =~ m/^ ( \d+ (?: [.]\d+)?) e[+] (\d+) $/msx) {
         my ($mantissa, $exponent) = ($1, $2);
 
-        if ($mantissa < 1) {
+        if ($mantissa <= 1) {
             $zeroes = $exponent;
         }
         else {
