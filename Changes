@@ -1,3 +1,7 @@
+--- 0.04 (23/11/2010) ---
+    * fixed bug in scientific notation parsing logic
+    * enabled very large numbers (up to adant singhar which is a duodecillion)
+
 --- 0.03 (23/11/2010) ---
     * pluralize lakhs/crores when the number is not 1
     * decided on "1.01 crores" not "1 crore 1 lakh"
