@@ -1,3 +1,6 @@
+--- 0.06 (26/11/2010) ---
+    * fixed MSWin32 specific bug - scientific notation is different there
+
 --- 0.05 (23/11/2010) ---
     * fixed 32bit only bug that occurs for shankhs vs padmas
 

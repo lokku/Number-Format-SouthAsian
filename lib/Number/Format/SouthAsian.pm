@@ -4,6 +4,7 @@ use warnings;
 package Number::Format::SouthAsian;
 
 use Carp;
+use English qw(-no_match_vars);
 use Scalar::Util qw(looks_like_number);
 
 =head1 NAME
@@ -125,6 +126,11 @@ sub _format_number_wordy {
     # we have to get around that.
     if ($number =~ m/^ ( \d+ (?: [.]\d+)?) e[+] (\d+) $/msx) {
         my ($mantissa, $exponent) = ($1, $2);
+
+        ## in MSWin32 the exponent has an extra 0 on the front...
+        if ($OSNAME eq 'MSWin32') {
+            $exponent =~ s/^0+//;
+        }
 
         if ($mantissa <= 1) {
             $zeroes = $exponent;
