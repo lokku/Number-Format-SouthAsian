@@ -100,7 +100,7 @@ sub format_number {
     my $result;
 
     if ($want_words) {
-        return  $self->_format_number_wordy($number, %opts);
+        return $self->_format_number_wordy($number, %opts);
     }
     else {
         return $self->_format_number_separators_only($number, %opts);
