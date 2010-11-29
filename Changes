@@ -1,3 +1,7 @@
+--- 0.07 (29/11/2010) ---
+    * added "decimals" option which lets you round decimal numbers
+    * more tests
+
 --- 0.06 (26/11/2010) ---
     * fixed MSWin32 specific bug - scientific notation is different there
 

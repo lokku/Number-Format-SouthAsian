@@ -24,12 +24,20 @@ words rather than simply separating the numbers with commas.
     say $formatter->format_number(12345678);             # 1,23,45,678
     say $formatter->format_number(12345678, words => 1); # 1.2345678 crores
 
-You can also specify words to new(), which has the affect of setting a
+You can also specify words to new(), which has the effect of setting a
 default value to be used.
 
     my $formatter = Number::Format::SouthAsian->new(words => 1);
     say $formatter->format_number(12345678);             # 1.2345678 crores
     say $formatter->format_number(12345678, words => 0); # 1,23,45,678
+
+You can also specify "decimals" to either new() or format_number(), which has
+the effect of rounding any decimals found. Note that this means slightly
+different things depending on wordiness.
+
+    my $rounding_formatter = Number::Format::SouthAsian->new(decimals => 2);
+    say $rounding_formatter->format_number(1234.5678); # 1,234.57
+    say $rounding_formatter->format_number(12345678, words => 1); # 1.23 crores
 
 =head1 METHODS
 
@@ -38,9 +46,9 @@ default value to be used.
 Optionally takes a named parameter 'words' which sets the default of the
 'words' parameter to format_number.
 
-    my $normal_formatter = Number::Format::SouthAsian->new();
-
-    my $wordy_formatter = Number::Format::SouthAsian->new(words => 1);
+    my $normal_formatter   = Number::Format::SouthAsian->new();
+    my $wordy_formatter    = Number::Format::SouthAsian->new(words => 1);
+    my $rounding_formatter = Number::Format::SouthAsian->new(decimals => 2);
 
 =cut
 
@@ -58,7 +66,10 @@ sub _init_defaults {
     my $self = shift;
     my %opts = @_;
 
-    $self->{'defaults'}{'words'} = $opts{'words'} || 0;
+    $self->{'defaults'}{'words'}    = $opts{'words'}    || 0;
+    $self->{'defaults'}{'decimals'} = $opts{'decimals'} || 0;
+
+    return;
 }
 
 =head2 format_number
@@ -86,8 +97,10 @@ sub format_number {
                    ? $opts{'words'}
                    : $self->{'defaults'}{'words'};
 
+    my $result;
+
     if ($want_words) {
-        return $self->_format_number_wordy($number, %opts);
+        return  $self->_format_number_wordy($number, %opts);
     }
     else {
         return $self->_format_number_separators_only($number, %opts);
@@ -159,6 +172,8 @@ sub _format_number_wordy {
 
     my $word = $zeroes_to_words{$zeroes};
 
+    $fraction = $self->_correct_decimals($fraction, %opts);
+
     my $pluralization = $fraction eq '1' ? '' : 's';
 
     my $words = sprintf('%s %s%s', $fraction, $word, $pluralization);
@@ -188,6 +203,35 @@ sub _format_number_separators_only {
         (?<! ^     )
         (?=  \d{2},)
     }{,}gmsx;
+
+    1 while $number =~ s{([.].*),}{$1}gmsx;
+
+    $number = $self->_correct_decimals($number, %opts);
+
+    return $number;
+}
+
+sub _correct_decimals {
+    my ($self, $number, %opts) = @_;
+
+    my $decimals = exists($opts{'decimals'})
+                 ? $opts{'decimals'}
+                 : $self->{'defaults'}{'decimals'};
+
+    if ($decimals) {
+        my $pattern = "%.${decimals}f";
+
+        $number =~ s{
+            (\d+[.]\d+)
+        }{
+            sprintf($pattern, $1);
+        }egmsx;
+
+        if ($number =~ m/[.]/) {
+            $number =~ s/0+$//;
+            $number =~ s/[.]$//;
+        }
+    }
 
     return $number;
 }
