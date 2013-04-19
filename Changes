@@ -1,0 +1,28 @@
+--- 0.07 (29/11/2010) ---
+    * added "decimals" option which lets you round decimal numbers
+    * more tests
+
+--- 0.06 (26/11/2010) ---
+    * fixed MSWin32 specific bug - scientific notation is different there
+
+--- 0.05 (23/11/2010) ---
+    * fixed 32bit only bug that occurs for shankhs vs padmas
+
+--- 0.04 (23/11/2010) ---
+    * fixed bug in scientific notation parsing logic
+    * enabled very large numbers (up to adant singhar which is a duodecillion)
+
+--- 0.03 (23/11/2010) ---
+    * pluralize lakhs/crores when the number is not 1
+    * decided on "1.01 crores" not "1 crore 1 lakh"
+    * added tests that check the optional new() parameter behaviour
+
+--- 0.02 (22/11/2010) ---
+    * added forgotten Changes file
+    * added forgotten requirements (all core modules so not a problem)
+    * fixed POD typo
+
+--- 0.01 (22/11/2010) ---
+    * basic functionality
+    * wordy and non-wordy modes
+    * tests
