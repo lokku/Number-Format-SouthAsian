@@ -1,5 +1,9 @@
 Revision history for perl module Number::Format::SouthAsian
 
+0.09 2013-07-18
+    * Updated Changes to conform to CPAN::Changes::Spec
+    * Added a release test via Dist::Zilla::Plugin::Test::CPAN::Changes
+
 0.08 2013-05-21
     * Updated repository.web and repository.url
       "kaoru" -> "lokku"
