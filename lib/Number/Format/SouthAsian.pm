@@ -2,10 +2,7 @@ use strict;
 use warnings;
 
 package Number::Format::SouthAsian;
-{
-  $Number::Format::SouthAsian::VERSION = '0.07';
-}
-
+$Number::Format::SouthAsian::VERSION = '0.09';
 use Carp;
 use English qw(-no_match_vars);
 use Scalar::Util qw(looks_like_number);
@@ -16,7 +13,7 @@ Number::Format::SouthAsian - format numbers in the South Asian style
 
 =head1 VERSION
 
-version 0.07
+version 0.09
 
 =head1 SYNOPSIS
 

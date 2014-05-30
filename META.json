@@ -4,7 +4,7 @@
       "Alex Balhatchet (alex@lokku.com)"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 4.300034, CPAN::Meta::Converter version 2.120921",
+   "generated_by" : "Dist::Zilla version 5.019, CPAN::Meta::Converter version 2.140640",
    "license" : [
       "perl_5"
    ],
@@ -21,6 +21,7 @@
       },
       "develop" : {
          "requires" : {
+            "Test::CPAN::Changes" : "0.19",
             "Test::Pod" : "1.41"
          }
       },
@@ -42,10 +43,10 @@
    "resources" : {
       "repository" : {
          "type" : "git",
-         "url" : "git://github.com/kaoru/Number-Format-SouthAsian.git",
-         "web" : "http://github.com/kaoru/Number-Format-SouthAsian"
+         "url" : "git://github.com/lokku/Number-Format-SouthAsian.git",
+         "web" : "http://github.com/lokku/Number-Format-SouthAsian"
       }
    },
-   "version" : "0.07"
+   "version" : "0.09"
 }
 
