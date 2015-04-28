@@ -14,5 +14,6 @@ t/00-compile.t
 t/01-numbers.t
 t/02-words.t
 t/03-round.t
+t/04-lakhs-and-crores-only-mode.t
 t/release-cpan-changes.t
 t/release-pod-syntax.t

@@ -20,4 +20,4 @@ requires:
   Scalar::Util: '0'
 resources:
   repository: git://github.com/lokku/Number-Format-SouthAsian.git
-version: '0.09'
+version: '0.10'
