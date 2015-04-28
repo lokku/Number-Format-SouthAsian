@@ -1,5 +1,8 @@
 Revision history for perl module Number::Format::SouthAsian
 
+0.10 2015-04-28
+    * Added "lakhs_and_crores_only" mode option for India
+
 0.09 2013-07-18
     * Updated Changes to conform to CPAN::Changes::Spec
     * Added a release test via Dist::Zilla::Plugin::Test::CPAN::Changes
