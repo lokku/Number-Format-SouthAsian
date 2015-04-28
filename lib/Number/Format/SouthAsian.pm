@@ -39,6 +39,14 @@ different things depending on wordiness.
     say $rounding_formatter->format_number(1234.5678); # 1,234.57
     say $rounding_formatter->format_number(12345678, words => 1); # 1.23 crores
 
+In India it is common to use lakhs and crores, but quite uncommon to see any of
+the other larger number names. An "arab" is much more likely to be called "100
+crores" and a "kharab" is more likely to be called a "lakh crore." This
+behaviour can be enabled with the lakhs_and_crores_only parameter.
+
+    my $lakhs_and_crores_only_formatter = Number::Format::SouthAsian->new(words => 1, lakhs_and_crores_only => 1);
+    say $lakhs_and_crores_only_formatter->format_number(1_00_00_00_000); # 100 crores
+
 =head1 METHODS
 
 =head2 new
@@ -68,6 +76,7 @@ sub _init_defaults {
 
     $self->{'defaults'}{'words'}    = $opts{'words'}    || 0;
     $self->{'defaults'}{'decimals'} = $opts{'decimals'} || 0;
+    $self->{'defaults'}{'lakhs_and_crores_only'} = $opts{'lakhs_and_crores_only'} || 0;
 
     return;
 }
@@ -128,6 +137,12 @@ my %zeroes_to_words = (
     '39' => 'adant singhar',
 );
 
+my %zeroes_to_words_lakhs_and_crores_only = (
+    '5'  => 'lakh',
+    '7'  => 'crore',
+    '12' => 'lakh crore'
+);
+
 sub _format_number_wordy {
     my $self = shift;
     my $number = shift;
@@ -153,13 +168,21 @@ sub _format_number_wordy {
         }
     }
 
+    my %z2w;
+    if ($opts{lakhs_and_crores_only} || (!exists($opts{lakhs_and_crores_only}) && $self->{'defaults'}{lakhs_and_crores_only})) {
+        %z2w = %zeroes_to_words_lakhs_and_crores_only;
+    }
+    else {
+        %z2w = %zeroes_to_words;
+    }
+
     if ($zeroes < 5) {
         return $self->_format_number_separators_only($number);
     }
 
     my $divisor = "1" . ("0" x $zeroes);
 
-    while (!$zeroes_to_words{$zeroes} || (($number / $divisor) < 1)) {
+    while (!$z2w{$zeroes} || (($number / $divisor) < 1)) {
         $zeroes  -=  1;
         $divisor /= 10;
     }
@@ -170,7 +193,7 @@ sub _format_number_wordy {
         $fraction =~ s/[.]$//;
     }
 
-    my $word = $zeroes_to_words{$zeroes};
+    my $word = $z2w{$zeroes};
 
     $fraction = $self->_correct_decimals($fraction, %opts);
 
