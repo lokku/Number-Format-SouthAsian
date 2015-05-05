@@ -4,13 +4,13 @@
       "Alex Balhatchet (alex@lokku.com)"
    ],
    "dynamic_config" : 0,
-   "generated_by" : "Dist::Zilla version 5.032, CPAN::Meta::Converter version 2.143240",
+   "generated_by" : "Dist::Zilla version 5.031, CPAN::Meta::Converter version 2.142690",
    "license" : [
       "perl_5"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
-      "version" : 2
+      "version" : "2"
    },
    "name" : "Number-Format-SouthAsian",
    "prereqs" : {

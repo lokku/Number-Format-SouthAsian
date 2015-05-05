@@ -30,6 +30,14 @@ different things depending on wordiness.
     say $rounding_formatter->format_number(1234.5678); # 1,234.57
     say $rounding_formatter->format_number(12345678, words => 1); # 1.23 crores
 
+In India it is common to use lakhs and crores, but quite uncommon to see any of
+the other larger number names. An "arab" is much more likely to be called "100
+crores" and a "kharab" is more likely to be called a "lakh crore." This
+behaviour can be enabled with the lakhs_and_crores_only parameter.
+
+    my $lakhs_and_crores_only_formatter = Number::Format::SouthAsian->new(words => 1, lakhs_and_crores_only => 1);
+    say $lakhs_and_crores_only_formatter->format_number(1_00_00_00_000); # 100 crores
+
 =head1 Copyright
 
 Copyright (C) 2010 Lokku Ltd.

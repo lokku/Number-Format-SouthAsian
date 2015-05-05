@@ -31,7 +31,7 @@ plan tests => 2 * (1 + @tests);
 
 {
     my $formatter = Number::Format::SouthAsian->new(words => 1, decimals => 3, lakhs_and_crores_only => 1);
-    ok($formatter, 'created $formatter object with words => 1, decimals => 2, lakhs_and_crores_only => 1');
+    ok($formatter, 'created $formatter object with words => 1, decimals => 3, lakhs_and_crores_only => 1');
 
     foreach my $test (@tests) {
         my ($input, $output) = @$test;
